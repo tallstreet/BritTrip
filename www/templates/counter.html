@@ -1,27 +1,16 @@
 <ion-view view-title="Start Page" ng-controller="counterPage">
 <ion-content  class="marginDown">
+<form>
 
-<div class="card">
-  <div class="item item-text-wrap">
-    How long do you have?
-    <!-- <spna style="font-size:smaller;">example 06:45</spna> -->
-    <label class="item item-input">
-      <input type="text" ng-model="time_left"  placeholder="HH:MM">
-    </label>
-  </div>
-  <div class="item item-text-wrap">
+  <label class="item item-input" for="timeSetter">What is the latest time you have to be back?</label>
+  <input id="timeSetter" type="time" ng-model="time_left"  placeholder="HH:MM">
 
-    Where is your final destination?
-    
-    <label class="item item-input">
-      <input type="text" ng-model="final_dest" placeholder="{{ final_dest }}">
-    </label>
-    <br>
-    <button ng-click="timex()" class="button button-block button button-positive">
-        Submit
-      </button>
-  </div>
-</div>
+  <label class="item item-input" for="finalDestination">What is your final location?</label>
+  <input id="finalDestination" type="text" ng-model="final_dest" placeholder="{{ final_dest }}">
+
+  <button ng-click="timex()" class="button button-block button button-positive">Submit</button>
+</form>
+
 
 
 
