@@ -211,10 +211,15 @@ h1:first-child {
 	width: auto;
 }
 
-.places-container .buttons a i {
+.places-container .buttons a i,
+.places-container .buttons span i {
 	font-size: 1.4em;
 	padding-right: 1em;
 	color: #fff;
+}
+
+.places-container .buttons span i {
+	color: #E8430C;
 }
 
 .rate-container button.step {
