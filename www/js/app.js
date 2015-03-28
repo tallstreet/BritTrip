@@ -20,88 +20,90 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+.config(
+  function($stateProvider, $urlRouterProvider) {
+    $stateProvider
 
-  .state('app', {
-    url: "/app",
-    abstract: true,
-    templateUrl: "templates/menu.html",
-    controller: 'AppCtrl'
-  })
-
-  .state('app.browse', {
-    url: "/browse",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/browse.html"
-      }
-    }
-  })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
+    .state('app', {
+      url: "/app",
+      abstract: true,
+      templateUrl: "templates/menu.html",
+      controller: 'AppCtrl'
     })
 
-  .state('app.single', {
-    url: "/playlists/:playlistId",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
-      }
-    }
-  })
-  .state('app.start', {
-      url: "/start",
+    .state('app.browse', {
+      url: "/browse",
       views: {
         'menuContent': {
-          templateUrl: "templates/start.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/browse.html"
         }
       }
     })
-  .state('app.counter', {
-      url: "/counter",
+      .state('app.playlists', {
+        url: "/playlists",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/playlists.html",
+            controller: 'PlaylistsCtrl'
+          }
+        }
+      })
+
+    .state('app.single', {
+      url: "/playlists/:playlistId",
       views: {
         'menuContent': {
-          templateUrl: "templates/counter.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/playlist.html",
+          controller: 'PlaylistCtrl'
         }
       }
     })
-  .state('app.places', {
-      url: "/places",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/places.html",
-          controller: 'placesCtrl'
+    .state('app.start', {
+        url: "/start",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/start.html",
+            controller: 'LoginCtrl'
+          }
         }
-      }
-    })
-  .state('app.cats', {
-      url: "/cats",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/cats.html",
-          controller: 'CatsCtrl'
+      })
+    .state('app.counter', {
+        url: "/counter",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/counter.html",
+            controller: 'PlaylistsCtrl'
+          }
         }
-      }
-    })
-  .state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/search.html",
-          controller: 'SearchCtrl'
+      })
+    .state('app.places', {
+        url: "/places",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/places.html",
+            controller: 'placesCtrl'
+          }
         }
-      }
-    });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/search');
-});
+      })
+    .state('app.cats', {
+        url: "/cats",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/cats.html",
+            controller: 'CatsCtrl'
+          }
+        }
+      })
+    .state('app.search', {
+        url: "/search",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/search.html",
+            controller: 'SearchCtrl'
+          }
+        }
+      });
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/search');
+  }
+);

@@ -1,4 +1,45 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['facebook'])
+
+//angular.module('starter.controllers', [])
+
+.config(['FacebookProvider', function(FacebookProvider) {
+    FacebookProvider.init('456458934502537');
+}])
+
+.controller('LoginCtrl', function($scope, Facebook) {
+        $scope.user = {};
+        $scope.logged = false;
+
+        $scope.$watch(
+            function() {
+                return Facebook.isReady();
+            },
+            function(newVal) {
+                if (newVal)
+                    $scope.facebookReady = true;
+            }
+        );
+
+        var isUserLoggedIn = false;
+
+        $scope.getLoginStatus = function() {
+            Facebook.getLoginStatus(function(response) {
+                if (response.status == 'connected')
+                    isUserLoggedIn = true;
+            });
+        };
+
+        $scope.login = function() {
+            if (!isUserLoggedIn) {
+                Facebook.login(function(response) {
+                    if (response.status == 'connected') {
+                        $scope.logged = true;
+                    }
+                });
+            }
+        };
+    }
+)
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
     // Form data for the login modal
