@@ -97,19 +97,15 @@ angular.module('starter.controllers', ['facebook'])
 })
 
 .controller('counterPage', function($scope) {
-    $scope.timexx = function() {
-        console.log(this.time_left);
-        $scope.count_down = this.time_left;
-    };
-    $scope.time_left = "HH:MM";
-    $scope.final_dest = "Heathrow Airport";
+    $scope.settings = {};
+    $scope.settings.time_left = new Date();
+    $scope.settings.time_left.setSeconds(0);
+    $scope.settings.time_left.setMilliseconds(0);
+    $scope.settings.final_dest = "Heathrow Airport";
 
     $scope.timex = function() {
-        stopped = $timeout(function() {
-            console.log($scope.counter);
-            $scope.counter--;
-            $scope.countdown();
-        }, 1000);
+      window.localStorage.time_left = JSON.stringify($scope.settings.time_left);
+      window.localStorage.final_dest = JSON.stringify($scope.settings.final_dest);
     };
 
 })

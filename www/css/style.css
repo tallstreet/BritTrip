@@ -17,17 +17,69 @@ h1:first-child {
 	border-radius: 2.2em;
 }
 
-.button-positive.facebook, .button-positive.signup {
+.button-positive.facebook, .button-positive.action {
 	display: block;
+	box-sizing: border-box;
 	font-size: 1.2rem;
 	background: #345995;
 	border-color: #345995;
 	margin: 2em auto;
 	padding: 0.4em 1.3em;
-	width: 16em;
+	width: 80%;
+	max-width: 18rem;
 }
 
-.button-positive.signup {
+.button-positive.action {
 	background: #EAC435;
 	border-color: #EAC435;
 }
+
+.counter-container {
+	background: #E8430C;
+}
+
+.counter-container h2 {
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-weight: 300;
+	margin: 0.4em auto;
+}
+
+.counter-container .card {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 18rem;
+	background: transparent;
+	background: rgba(250,250,250,0.1);
+	border: none;
+	margin: 0 auto;
+	margin-top: 3em;
+	padding: 0;
+	color: #fff;
+}
+
+.counter-container label {
+	display: block;
+	font-size: 1.2em;
+	padding: 0.6em;
+	letter-spacing: 0.03em;
+}
+
+.counter-container input {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+	text-align: center;
+	color: #fff;
+	background-color: rgba(250,250,250,0.2);
+	font-size: 1.4em;
+	padding: 0 2em;
+}
+
+.counter-container input:focus {
+	background-color: rgba(250,250,250,0.8);
+	color: #383838;
+}
+
