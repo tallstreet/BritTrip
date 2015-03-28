@@ -105,7 +105,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     }];
 })
 
-.controller('counterPage', function($scope, Facebook) {
+.controller('counterPage', function($scope, $state, Facebook) {
     $scope.settings = {};
     $scope.settings.time_left = new Date();
     $scope.settings.time_left.setSeconds(0);
@@ -116,6 +116,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
       window.localStorage.time_left = JSON.stringify($scope.settings.time_left);
       window.localStorage.final_dest = JSON.stringify($scope.settings.final_dest);
       $scope.getLikes();
+      $state.go('app.places');
     };
 
     $scope.getLikes = function() {
