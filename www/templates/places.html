@@ -32,7 +32,7 @@
       <div class="buttons">
         <span ng-if="timeLine[i.id].distance > 0" class="item"><i class="icon ion-android-walk"></i>{{timeLine[i.id].distance}} m</span>
         <span ng-if="timeLine[i.id].time > 0" class="item"><i class="icon ion-android-stopwatch"></i>{{timeLine[i.id].time}} s</span>
-        <a class="item" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}"><i class="icon ion-ios-navigate-outline"></i>Take me there</a>
+        <a class="item" ng-click="save_place(i)" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}"><i class="icon ion-ios-navigate-outline"></i>Take me there</a>
       </div>
 
     </div>

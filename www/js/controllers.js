@@ -179,7 +179,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
             $scope.final_dest = position.coords;
         });
 
-    $scope.$on('destroy', function() {
+    $scope.$on('$destroy', function() {
         watch.clearWatch();
     });
 
@@ -229,12 +229,20 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 })
 
 
+.controller('RateCtrl', function($scope) {
+    if (window.localStorage.place) {
+      $scope.place = JSON.parse(window.localStorage.place);
+    } else {
+      $scope.place = {'name': 'London Bridge', 'id': 2};
+    }
 
-.controller('RateCtrl', function($scope, $http) {
-    $scope.place = window.localStorage.place || {};
-    $scope.place.name = 'London Bridge';
+    $scope.$on('$destroy', function() {
+      window.localStorage.removeItem('place');
+    });
+
 
     $scope.rate = function() {
+        window.localStorage.removeItem('place');
         $http({
             method: 'GET',
             url: 'http://api.visitbritain.com/items/' + $scope.place.id + '/love'
@@ -308,9 +316,6 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         timeString += (secs < 10) ? "0" + secs : secs;
         $scope.count_down.timeString = timeString;
 
-        // if(!$scope.$$phase) {
-        //     $scope.$apply();
-        // }
     }, 1000);
 
     cats = [
@@ -484,7 +489,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                         "destinations": {},
                         "remove_wait_time": false
 
-                
+
                 }).success(function(d) {
                 console.log(d);
                 $scope.hey = "shahinhello"; //shahin attempting to make something useful-->
@@ -494,6 +499,12 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 };
 
+    $scope.save_place = function(place) {
+      window.localStorage.place = JSON.stringify({
+        'name': place.title,
+        'id': place.id
+      });
+    };
 
 $scope.test(51.5140186, -0.128734, 100);
 })
