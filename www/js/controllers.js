@@ -289,228 +289,138 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 })
 
 .controller('placesCtrl', function($scope, $http, $interval) {
-    $scope.count_down = {};
+        $scope.count_down = {};
 
-    $scope.count_down.timeLeft = new Date(JSON.parse(window.localStorage.time_left)).getTime() - new Date().getTime();
+        $scope.count_down.timeLeft = new Date(JSON.parse(window.localStorage.time_left)).getTime() - new Date().getTime();
 
-    $interval(function() {
-        $scope.count_down.timeLeft = $scope.count_down.timeLeft - 1000;
+        $interval(function() {
+            $scope.count_down.timeLeft = $scope.count_down.timeLeft - 1000;
 
-        var seconds = Math.floor($scope.count_down.timeLeft / 1000);
-        var days = Math.floor(seconds / 86400);
-        var hours = Math.floor((seconds % 86400) / 3600);
-        var minutes = Math.floor(((seconds % 86400) % 3600) / 60);
-        var secs = Math.floor(((seconds % 86400) % 3600) % 60);
+            var seconds = Math.floor($scope.count_down.timeLeft / 1000);
+            var days = Math.floor(seconds / 86400);
+            var hours = Math.floor((seconds % 86400) / 3600);
+            var minutes = Math.floor(((seconds % 86400) % 3600) / 60);
+            var secs = Math.floor(((seconds % 86400) % 3600) % 60);
 
-        var timeString = '';
-        timeString += hours + " : ";
-        timeString += (minutes < 10) ? "0" + minutes + " : " : minutes + " : ";
-        timeString += (secs < 10) ? "0" + secs : secs;
-        $scope.count_down.timeString = timeString;
+            var timeString = '';
+            timeString += hours + " : ";
+            timeString += (minutes < 10) ? "0" + minutes + " : " : minutes + " : ";
+            timeString += (secs < 10) ? "0" + secs : secs;
+            $scope.count_down.timeString = timeString;
 
-        console.log("time string " + $scope.count_down.timeString);
+            console.log("time string " + $scope.count_down.timeString);
 
-        // if(!$scope.$$phase) {
-        //     $scope.$apply();
-        // }
-    }, 1000);
-
-    cats = [
-        ["cities and towns", 0],
-        ["countryside", 0],
-        ["culture", 0],
-        ["family friendly", 0],
-        ["film and tv", 0],
-        ["food and drinks", 0],
-        ["landmarks", 0],
-        ["music", 0]
-    ];
-
-    fbCats = ["cities", "food"];
-
-    for (i = 0; i < fbCats.length; i++) {
-        max = 0;
-        target = "";
-        for (c = 0; c < cats.length; c++) {
-            var l = new Levenshtein(fbCats[i], cats[c][0]);
-            if (l > max) {
-                max = l;
-                target = c
-            }
-        }
-        cats[target][1] += max;
-    }
-
-
-
-    $scope.topThree = _.at(_.sortBy(_.filter(cats, function(item) {
-        return item[1] > 0
-    }), function(item) {
-        return item[1] * -1;
-    }), 0, 1, 2);
-
-    //console.log('huh');
-    var cat_child = function() {
-        token = 't=A9NsGgd9UmxR';
-        rl = 'http://api.visitbritain.com/items?type=category&' + token;
-        console.log(rl);
-
-        $http({
-            method: 'GET',
-            url: rl,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).success(function(m) {
-            cats_with_children = [
-                [m.data[0].title, m.data[0].children],
-                [m.data[1].title, m.data[1].children],
-                [m.data[2].title, m.data[2].children],
-                [m.data[3].title, m.data[3].children],
-                [m.data[4].title, m.data[4].children],
-                [m.data[5].title, m.data[5].children],
-                [m.data[6].title, m.data[6].children],
-                [m.data[7].title, m.data[7].children]
-            ];
-            // for (i = 0; i > m.data.length; i++) {
-            //     cats_with_children[i] = m.data[i].children;
+            // if(!$scope.$$phase) {
+            //     $scope.$apply();
             // }
-            console.log(m.data[0].children);
-            console.log(cats_with_children);
+        }, 1000);
 
-            $scope.CatChild = cats_with_children;
-        })
-    }
+        cats = [
+            ["cities and towns", 0],
+            ["countryside", 0],
+            ["culture", 0],
+            ["family friendly", 0],
+            ["film and tv", 0],
+            ["food and drinks", 0],
+            ["landmarks", 0],
+            ["music", 0]
+        ];
 
-    cat_child();
+        fbCats = ["cities", "food"];
 
-    console.log('hey its me agia.');
-    console.log($scope.topThree);
-    console.log($scope.CatChild);
-
-
-    hello = $http.get('http://api.visitbritain.com/items?type=location&near=-3.393402,57.009337&limit=24&t=A9NsGgd9UmxR');
-
-    //console.log(hello);
-    pos = '-3.393402,57.009337';
-    pos = '-0.155602,51.504034';
-    limit = 'limit=24';
-    token = 't=A9NsGgd9UmxR';
-    me = '';
-    uurl = 'http://api.visitbritain.com/items?type=location&near=' + pos + '&' + limit + '&' + token;
-    cat = 'http://api.visitbritain.com/items?type=category&' + limit + '&' + token;
-
-    $scope.test = function(lat, lng, lmt) {
-
-        lt = parseFloat(lat);
-        ln = parseFloat(lng);
-        limit = 'limit=' + lmt;
-        token = 't=A9NsGgd9UmxR';
-        me = '';
-        uurl = 'http://api.visitbritain.com/items?type=location&near=' + ln + ',' + lt + '&' + limit + '&' + token;
-        console.log(uurl);
-
-        $http({
-            method: 'GET',
-            url: uurl,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).success(function(m) {
-
-        })
-
-        ////////// safe
-        $http({
-            method: 'GET',
-            url: uurl,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).success(function(r) {
-                locs = {};
-                for (var i = 0; i < r.data.length; i++) {
-                    if (r.data[i].location != null) {
-                        locs[i] = [r.data[i].location.lat, r.data[i].location.lng];
-                    }
-
+        for (i = 0; i < fbCats.length; i++) {
+            max = 0;
+            target = "";
+            for (c = 0; c < cats.length; c++) {
+                var l = new Levenshtein(fbCats[i], cats[c][0]);
+                if (l > max) {
+                    max = l;
+                    target = c
                 }
-                $http({
-                    method: 'POST',
-                    url: 'http://api.traveltimeapp.com/v3/routes',
-                    header: {
-                        "Content-Type": "application/json"
-                    },
-                    data: {
-                        "app_id": "893138db",
-                        "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
-                        "target": {
-                            "coords": [lt, ln],
-                            "start_time": "2015-03-28T07:15:00.000Z",
-                            "travel_time": 30000,
-                            "mode": "walking_bus"
-                        },
-                        "points": locs
-                    }
-                }).success(function(d) {
-                    console.log('D starts here');
-                    console.log(d);
-                    $scope.timeLine = d;
-                })
-                console.log(r);
-                $scope.me = r;
-                $scope.Places = r;
-
-                ///// hey start here shahin
-
-                $http({
-                        method: 'POST',
-                        url: 'http://api.traveltimeapp.com/v3/time_filter',
-                        header: {
-                            "Content-Type": "application/json"
-                        },
-                        data: {
-                            "app_id": "893138db",
-                            "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
-                            "points": locs
-                        },
-                        "sources": {
-                            "source1": {
-                                "travel_time": 3600,
-                                "coords": [lt, ln],
-                                "mode": "walking_bus",
-                                "properties": ["time"],
-                                "start_time": new Date()
-                            }
-                        },
-                        "destinations": {},
-                        "remove_wait_time": false
-
-                
-                }).success(function(d) {
-                console.log(d);
-                $scope.hey = "shahinhello"; //shahin attempting to make something useful-->
-            });
-
-        });
-
-};
+            }
+            cats[target][1] += max;
+        }
 
 
-$scope.test(51.5140186, -0.128734, 100);
-})
 
-.controller('CatsCtrl', function($scope, $stateParams, $http) {
+        $scope.topThree = _.at(_.sortBy(_.filter(cats, function(item) {
+            return item[1] > 0
+        }), function(item) {
+            return item[1] * -1;
+        }), 0, 1, 2);
 
-    $scope.cat = function(lat, lng, lmt) {
+        //console.log('huh');
+        var cat_child = function() {
+            token = 't=A9NsGgd9UmxR';
+            rl = 'http://api.visitbritain.com/items?type=category&' + token;
+            // console.log(rl);
 
-        pos = parseFloat(lat);
-        pos = parseFloat(lng);
-        limit = 'limit=' + lmt;
+            $http({
+                method: 'GET',
+                url: rl,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).success(function(m) {
+                cats_with_children = [
+                    [m.data[0].title, m.data[0].children],
+                    [m.data[1].title, m.data[1].children],
+                    [m.data[2].title, m.data[2].children],
+                    [m.data[3].title, m.data[3].children],
+                    [m.data[4].title, m.data[4].children],
+                    [m.data[5].title, m.data[5].children],
+                    [m.data[6].title, m.data[6].children],
+                    [m.data[7].title, m.data[7].children]
+                ];
+                // for (i = 0; i > m.data.length; i++) {
+                //     cats_with_children[i] = m.data[i].children;
+                // }
+                // console.log(m.data[0].children);
+                // console.log(cats_with_children);
+
+                $scope.CatChild = cats_with_children;
+            })
+        }
+
+        cat_child();
+
+        // console.log('hey its me agia.');
+        // console.log($scope.topThree);
+        // console.log($scope.CatChild);
+
+
+        hello = $http.get('http://api.visitbritain.com/items?type=location&near=-3.393402,57.009337&limit=24&t=A9NsGgd9UmxR');
+
+        //console.log(hello);
+        pos = '-3.393402,57.009337';
+        pos = '-0.155602,51.504034';
+        limit = 'limit=24';
         token = 't=A9NsGgd9UmxR';
         me = '';
-        uurl = 'http://api.visitbritain.com/items?type=category&' + token;
-        if (window.localStorage['cats'] == undefined) {
+        uurl = 'http://api.visitbritain.com/items?type=location&near=' + pos + '&' + limit + '&' + token;
+        cat = 'http://api.visitbritain.com/items?type=category&' + limit + '&' + token;
+
+        $scope.test = function(lat, lng, lmt) {
+
+            lt = parseFloat(lat);
+            ln = parseFloat(lng);
+            limit = 'limit=' + lmt;
+            token = 't=A9NsGgd9UmxR';
+            me = '';
+            uurl = 'http://api.visitbritain.com/items?type=location&near=' + ln + ',' + lt + '&' + limit + '&' + token;
+            // console.log(uurl);
+
+            $http({
+                method: 'GET',
+                url: uurl,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).success(function(m) {
+
+            })
+
+            ////////// safe
             $http({
                 method: 'GET',
                 url: uurl,
@@ -518,94 +428,184 @@ $scope.test(51.5140186, -0.128734, 100);
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(r) {
-                catz = []
-                for (var i = 0; i < r.data.length; i++) {
-                    if (r.data[i].title.length > 1) {
-                        catz[i] = {
-                            "id": r.data[i].id,
-                            "rank": r.data[i].rank,
-                            "loves": r.data[i].loves,
-                            "images": r.data[i].images,
-                            "title": r.data[i].title,
-                            "ckecked": false
-                        };
+                    locs = {};
+                    for (var i = 0; i < r.data.length; i++) {
+                        if (r.data[i].location != null) {
+                            locs[i] = [r.data[i].location.lat, r.data[i].location.lng];
+                        }
+
                     }
-                }
-                window.localStorage['cats'] = JSON.stringify(catz);
-                console.log(r);
-                console.log(catz);
+                    $http({
+                        method: 'POST',
+                        url: 'http://api.traveltimeapp.com/v3/routes',
+                        header: {
+                            "Content-Type": "application/json"
+                        },
+                        data: {
+                            "app_id": "893138db",
+                            "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
+                            "target": {
+                                "coords": [lt, ln],
+                                "start_time": "2015-03-28T07:15:00.000Z",
+                                "travel_time": 30000,
+                                "mode": "walking_bus"
+                            },
+                            "points": locs
+                        }
+                    }).success(function(d) {
+                        // console.log('D starts here');
+                        // console.log(d);
+                        $scope.timeLine = d;
+                    })
+                    // console.log(r);
+                    $scope.me = r;
+                    $scope.Places = r;
 
-                $scope.cats = JSON.parse(window.localStorage['cats'] || '{}');
-            });
-        }
+                    ///// hey start here shahin
 
-    };
+                    $http({
+                            method: 'POST',
+                            url: 'http://api.traveltimeapp.com/v3/time_filter',
+                            header: {
+                                "Content-Type": "application/json"
+                            },
+                            data: {
+                                "app_id": "893138db",
+                                "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
+                                "points": locs,
+                                "sources": {
+                                    "source1": {
+                                        "travel_time": 3600,
+                                        "coords": [lt, ln],
+                                        "mode": "walking_bus",
+                                        "properties": ["time", "distance"],
+                                        "start_time": new Date()
+                                    }
+                                },
+                                "destinations": {},
+                                "remove_wait_time": false
 
-    $scope.cat();
-    $scope.cats = JSON.parse(window.localStorage['cats'] || '{}');
-    $scope.clicked = function(id) {
-        console.log(id);
-        data = JSON.parse(window.localStorage['cats'] || '{}');
-        for (var i = 0; i < data.length; i++) {
-            if (parseInt(data[i].id) == parseInt(id)) {
-                if (data[i].checked == false) {
-                    data[i].checked = true;
-                } else {
-                    data[i].checked = false;
-                }
+                            }
+                            }).success(function(d) {
+                            console.log(d);
+                            $scope.robert = d;
+                            $scope.hey = "shahinhello"; //shahin attempting to make something useful-->
+                        });
 
+                    });
+
+            };
+
+
+            $scope.test(51.5140186, -0.128734, 100);
+        })
+
+    .controller('CatsCtrl', function($scope, $stateParams, $http) {
+
+        $scope.cat = function(lat, lng, lmt) {
+
+            pos = parseFloat(lat);
+            pos = parseFloat(lng);
+            limit = 'limit=' + lmt;
+            token = 't=A9NsGgd9UmxR';
+            me = '';
+            uurl = 'http://api.visitbritain.com/items?type=category&' + token;
+            if (window.localStorage['cats'] == undefined) {
+                $http({
+                    method: 'GET',
+                    url: uurl,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).success(function(r) {
+                    catz = []
+                    for (var i = 0; i < r.data.length; i++) {
+                        if (r.data[i].title.length > 1) {
+                            catz[i] = {
+                                "id": r.data[i].id,
+                                "rank": r.data[i].rank,
+                                "loves": r.data[i].loves,
+                                "images": r.data[i].images,
+                                "title": r.data[i].title,
+                                "ckecked": false
+                            };
+                        }
+                    }
+                    window.localStorage['cats'] = JSON.stringify(catz);
+                    console.log(r);
+                    console.log(catz);
+
+                    $scope.cats = JSON.parse(window.localStorage['cats'] || '{}');
+                });
             }
-            console.log(data[i]);
+
+        };
+
+        $scope.cat();
+        $scope.cats = JSON.parse(window.localStorage['cats'] || '{}');
+        $scope.clicked = function(id) {
+            console.log(id);
+            data = JSON.parse(window.localStorage['cats'] || '{}');
+            for (var i = 0; i < data.length; i++) {
+                if (parseInt(data[i].id) == parseInt(id)) {
+                    if (data[i].checked == false) {
+                        data[i].checked = true;
+                    } else {
+                        data[i].checked = false;
+                    }
+
+                }
+                console.log(data[i]);
+            }
+            window.localStorage['cats'] = JSON.stringify(data);
+            console.log(data);
+
         }
-        window.localStorage['cats'] = JSON.stringify(data);
-        console.log(data);
 
-    }
+    })
 
-})
+    .controller('GeoCtrl', function($scope, $cordovaGeolocation) {
 
-.controller('GeoCtrl', function($scope, $cordovaGeolocation) {
-
-    var posOptions = {
-        timeout: 10000,
-        enableHighAccuracy: false
-    };
-    $cordovaGeolocation
-        .getCurrentPosition(posOptions)
-        .then(function(position) {
-            var lat = position.coords.latitude
-            var long = position.coords.longitude
-            $scope.my_lat = lat;
-            $scope.my_long = long;
-        }, function(err) {
-            // error
-        });
+        var posOptions = {
+            timeout: 10000,
+            enableHighAccuracy: false
+        };
+        $cordovaGeolocation
+            .getCurrentPosition(posOptions)
+            .then(function(position) {
+                var lat = position.coords.latitude
+                var long = position.coords.longitude
+                $scope.my_lat = lat;
+                $scope.my_long = long;
+            }, function(err) {
+                // error
+            });
 
 
-    var watchOptions = {
-        frequency: 1000,
-        timeout: 3000,
-        enableHighAccuracy: false // may cause errors if true
-    };
+        var watchOptions = {
+            frequency: 1000,
+            timeout: 3000,
+            enableHighAccuracy: false // may cause errors if true
+        };
 
-    var watch = $cordovaGeolocation.watchPosition(watchOptions);
-    watch.then(
-        null,
-        function(err) {
-            // error
-        },
-        function(position) {
-            var lat = position.coords.latitude
-            var long = position.coords.longitude
-        });
+        var watch = $cordovaGeolocation.watchPosition(watchOptions);
+        watch.then(
+            null,
+            function(err) {
+                // error
+            },
+            function(position) {
+                var lat = position.coords.latitude
+                var long = position.coords.longitude
+            });
 
 
-    watch.clearWatch();
-    // OR
-    // $cordovaGeolocation.clearWatch(watch)
-    //   .then(function(result) {
-    //     // success
-    //     }, function (error) {
-    //     // error
-    //   });
-})
+        watch.clearWatch();
+        // OR
+        // $cordovaGeolocation.clearWatch(watch)
+        //   .then(function(result) {
+        //     // success
+        //     }, function (error) {
+        //     // error
+        //   });
+    })
