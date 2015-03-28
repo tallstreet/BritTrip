@@ -1,12 +1,13 @@
-angular.module('starter.controllers', ['facebook'])
+angular.module('starter.controllers', ['facebook', 'ionic'])
 
 //angular.module('starter.controllers', [])
 
 .config(['FacebookProvider', function(FacebookProvider) {
     FacebookProvider.init('456458934502537');
-}])
+    }
+])
 
-.controller('LoginCtrl', function($scope, Facebook) {
+.controller('LoginCtrl', function($scope, $ionicPopup, Facebook) {
         $scope.user = {};
         $scope.logged = false;
 
@@ -33,10 +34,22 @@ angular.module('starter.controllers', ['facebook'])
             if (!isUserLoggedIn) {
                 Facebook.login(function(response) {
                     if (response.status == 'connected') {
+                        window.localStorage.fbAccessToken = response.authResponse.accessToken;
                         $scope.logged = true;
+                    } else {
+                        window.localStorage.fbAccessToken = ''
+                        $scope.showLoginFailed();
+                        $scope.logged = false;
                     }
                 });
             }
+        };
+
+        $scope.showLoginFailed = function() {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Cats are evil',
+                template: 'Login failed.'
+            });
         };
     }
 )
