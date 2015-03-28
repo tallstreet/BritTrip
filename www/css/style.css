@@ -99,13 +99,16 @@ h1:first-child {
 .places-container {
 	background: #03CEA4;
 	width: 100%;
-	
 }
 
 .places-container .list.card {
 	display: inline-block;
 	width: 100%;
 	margin: 0;
+}
+
+.places-container .description {
+	border-bottom: none;
 }
 
 .places-container i {
@@ -130,12 +133,36 @@ h1:first-child {
 	width: auto;
 	max-width: 78%;
 	padding-left: 5%;
-	
+	border-bottom: none;
 }
 
 .places-container .text p {
 	overflow: visible;
 	text-overflow: clip;
 	white-space: normal;
+}
+
+.places-container .buttons {
+	text-align: right;
+}
+
+.places-container .buttons span,
+.places-container .buttons a {
+	display: inline-block;
+	max-width: 32%;
+	text-align: left;
+	white-space: normal;
+	/*border: none;*/
+}
+
+.places-container .buttons a {
+	background: #E8430C;
+	color: #fff;
+}
+
+.places-container .buttons a i {
+	font-size: 1.4em;
+	padding-right: 1em;
+	color: #fff;
 }
 

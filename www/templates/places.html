@@ -22,7 +22,7 @@
       <div class="item item-image">
         <img ng-src="http://media.api.visitbritain.com/{{i.images[0]}}_cell_2x2_1280.jpg">
       </div>
-      <div class="item">
+      <div class="item description">
         <i class="icon ion-ios-heart assertive"><span>{{i.loves}}</span></i>
         <div class="text">
           <h2>{{ i.title }}</h2>
@@ -31,10 +31,10 @@
         
         
       </div>
-      <div>
-        <span ng-if="timeLine[i.id]">{{timeLine[i.id].distance}}</span>
-        <span  ng-if="timeLine[i.id]">{{ parseInt(timeLine[i.id].time)}}</span>
-        <a class="item item-icon-left assertive" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}">
+      <div class="buttons">
+        <span ng-if="timeLine[i.id]" class="item">{{timeLine[i.id].distance}}</span>
+        <span ng-if="timeLine[i.id]" class="item">{{ parseInt(timeLine[i.id].time)}}</span>
+        <a class="item" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}">
           <i class="icon ion-ios-navigate-outline"></i>Take me there
         </a>
       </div>
