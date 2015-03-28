@@ -269,7 +269,6 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
     $scope.timex = function() {
         stopped = $timeout(function() {
-            console.log($scope.counter);
             $scope.counter--;
             $scope.countdown();
         }, 1000);
@@ -323,12 +322,6 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
             timeString += (minutes < 10) ? "0" + minutes + " : " : minutes + " : ";
             timeString += (secs < 10) ? "0" + secs : secs;
             $scope.count_down.timeString = timeString;
-
-            console.log("time string " + $scope.count_down.timeString);
-
-            // if(!$scope.$$phase) {
-            //     $scope.$apply();
-            // }
         }, 1000);
 
 
