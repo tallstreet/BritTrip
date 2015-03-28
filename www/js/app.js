@@ -27,25 +27,93 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
     .state('app', {
       url: "/app",
       abstract: true,
-      template: '<ion-nav-view></ion-nav-view>'
+      templateUrl: "templates/menu.html",
+      controller: 'AppCtrl'
+    })
+
+    .state('app.browse', {
+      url: "/browse",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/browse.html"
+        }
+      }
+    })
+      .state('app.playlists', {
+        url: "/playlists",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/playlists.html",
+            controller: 'PlaylistsCtrl'
+          }
+        }
+      })
+
+    .state('app.single', {
+      url: "/playlists/:playlistId",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/playlist.html",
+          controller: 'PlaylistCtrl'
+        }
+      }
     })
     .state('app.start', {
         url: "/start",
-        templateUrl: "templates/start.html"
+        views: {
+          'menuContent': {
+            templateUrl: "templates/start.html",
+            controller: 'LoginCtrl'
+          }
+        }
       })
     .state('app.counter', {
         url: "/counter",
-        templateUrl: "templates/counter.html"
+        views: {
+          'menuContent': {
+            templateUrl: "templates/counter.html",
+            controller: 'PlaylistsCtrl'
+          }
+        }
       })
     .state('app.places', {
         url: "/places",
-        templateUrl: "templates/places.html"
+        views: {
+          'menuContent': {
+            templateUrl: "templates/places.html",
+            controller: 'placesCtrl'
+          }
+        }
       })
     .state('app.rate', {
         url: "/rate",
-        templateUrl: "templates/rate.html"
+        views: {
+          'menuContent': {
+            templateUrl: "templates/rate.html",
+            controller: 'RateCtrl'
+          }
+        }
+      })
+    .state('app.cats', {
+        url: "/cats",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/cats.html",
+            controller: 'CatsCtrl'
+          }
+        }
+      })
+    .state('app.search', {
+        url: "/search",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/search.html",
+            controller: 'SearchCtrl'
+          }
+        }
       });
     // if none of the above states are matched, use this as the fallback
+
     if ( window.localStorage.place ) {
       $urlRouterProvider.otherwise('/app/rate');
     } else {
