@@ -14,16 +14,16 @@
 </div>
 <div ng-if="Places != null" ng-repeat="i in Places.data">
   <div class="list card" ng-if="i.title.length > 1">
+    <div class="item item-image">
+      <img ng-src="http://media.api.visitbritain.com/{{i.images[0]}}_cell_2x2_1280.jpg">
+    </div>
     <div class="item item-avatar">
-      <img ng-src="http://www.visitbritain.org/images/britain_logo.jpg">
       <h2>{{ i.title }}  {{i.loves}}<i class="icon ion-ios-heart assertive"></i></h2>
       <p>{{ i.description }}</p>
       <p>{{timeLine[i.id].distance}} Meters</p>
       <p>{{ parseInt(timeLine[i.id].time)/60}}</p>
     </div>
-    <div class="item item-image">
-      <img ng-src="http://media.api.visitbritain.com/{{i.images[0]}}_cell_2x2_1280.jpg">
-    </div>
+    
     <a class="item item-icon-left assertive" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}">
       <i class="icon ion-ios-navigate-outline"></i>
       Take Me there
@@ -31,9 +31,7 @@
   </div>
 </div>
 </ion-content>
-<ion-footer-bar>
-<div class="button-bar">
+<ion-footer-bar  ng-if="count_down.length > 0">
   <button class="button button-energized button-clear counter_active">{{ count_down }}</button>
-</div>
 </ion-footer-bar>
 </ion-view>
