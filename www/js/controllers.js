@@ -157,6 +157,10 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
       });
     };
 
+    $scope.set_location = function ($result) {
+      $scope.final_dest = $result;
+    };
+
     $scope.submit = function() {
       window.localStorage.time_left = JSON.stringify($scope.settings.time_left);
       window.localStorage.final_dest = JSON.stringify($scope.settings.final_dest);
