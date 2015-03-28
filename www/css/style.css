@@ -60,6 +60,7 @@ h1:first-child {
 }
 
 .counter-container .card {
+	position: relative;
 	box-sizing: border-box;
 	width: 100%;
 	max-width: 18rem;
@@ -95,6 +96,34 @@ h1:first-child {
 	color: #383838;
 }
 
+.counter-container .typeahead {
+	background: #fff;
+	opacity: 0.8;
+	color: #000;
+}
+
+.counter-container .typeahead li {
+	padding: 0.8em 0.6em;
+	border-bottom: 1px solid #913313;
+}
+
+.counter-container [for="useCurrent"] i {
+	display: inline-block;
+	float: left;
+	margin-right: 0.4em;
+	font-size: 1.2em;
+}
+
+.counter-container input[type="checkbox"] {
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+	visibility: hidden;
+}
+
+.counter-container input[type="checkbox"]:checked + i {
+	color: #345995;
+}
 
 .places-container {
 	background: #03CEA4;
@@ -157,8 +186,6 @@ h1:first-child {
 .places-container .buttons span,
 .places-container .buttons a {
 	display: inline-block;
-	max-width: 32%;
-	width: 32%;
 	text-align: left;
 	white-space: normal;
 	/*border: none;*/
@@ -173,6 +200,7 @@ h1:first-child {
 	background: #E8430C;
 	color: #fff;
 	margin: 0;
+	width: auto;
 }
 
 .places-container .buttons a i {

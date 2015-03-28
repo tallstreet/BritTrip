@@ -34,9 +34,7 @@
       <div class="buttons">
         <span ng-if="timeLine[i.id].distance.length > 0" class="item">{{timeLine[i.id].distance}}</span>
         <span ng-if="timeLine[i.id].length > 0" class="item">{{ parseInt(timeLine[i.id].time)}}</span>
-        <a class="item" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}">
-          <i class="icon ion-ios-navigate-outline"></i>Take me there
-        </a>
+        <a class="item" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}"><i class="icon ion-ios-navigate-outline"></i>Take me there</a>
       </div>
       
     </div>
