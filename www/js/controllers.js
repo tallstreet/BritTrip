@@ -30,10 +30,12 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                 Facebook.login(function(response) {
                     if (response.status == 'connected') {
                         window.localStorage.fbAccessToken = response.authResponse.accessToken;
+                        window.localStorage.fbResponse = response;
                         $scope.logged = true;
                         $state.go('app.counter');
                     } else {
                         window.localStorage.fbAccessToken = ''
+                        window.localStorage.fbResponse = {};
                         $scope.showLoginFailed();
                         $scope.logged = false;
                     }
@@ -103,6 +105,35 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         title: 'Cowbell',
         id: 6
     }];
+})
+
+.controller('weight', function($scope) {
+    // resObj = window.localStorage.fbResponse
+    // response = JSON.parse(window.localStorage.fbResponse);
+    cats = [["cities and towns", 0],
+            ["countryside", 0],
+            ["culture", 0],
+            ["family friendly", 0],
+            ["film and tv", 0],
+            ["food and drinks", 0],
+            ["landmarks", 0],
+            ["music", 0]];
+
+    fbCats = ["cities","food"];
+
+    for(i = 0; i<fbCats.length; i++){
+        max = 0;
+        target = "";
+        for(c = 0; c < cats.length; c++){
+            var l = new Levenshtein(fbCats[i], cats[c][0]);
+            if(l > max){ max = l; target = c}
+        }
+        cats[target][1] += max;
+    }
+
+    //var l = new Levenshtein('hello', 'man');
+    //$scope.dist = l.distance;
+    console.log(cats);
 })
 
 .controller('counterPage', function($scope, $state, Facebook) {
