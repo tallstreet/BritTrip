@@ -1,0 +1,12 @@
+<ion-view view-title="Start Page" ng-controller="RateCtrl">
+<ion-content  class="marginDown counter-container">
+  <form>
+    <h2>Did you love {{ place.name }} ?</h2>
+    <button ng-click="rate()" class="button button-positive action">Yes</button>
+  </form>
+
+</ion-content>
+<ion-footer-bar ng-if="count_down.length > 0">
+  <button class="button button-energized button-clear counter_active">{{ count_down }}</button>
+</ion-footer-bar>
+</ion-view>

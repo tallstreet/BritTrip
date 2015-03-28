@@ -23,13 +23,6 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
         var isUserLoggedIn = false;
 
-        $scope.getLoginStatus = function() {
-            Facebook.getLoginStatus(function(response) {
-                if (response.status == 'connected')
-                    isUserLoggedIn = true;
-            });
-        };
-
         $scope.login = function() {
             if (isUserLoggedIn) {
                 $state.go('app.counter');
@@ -112,7 +105,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     }];
 })
 
-.controller('counterPage', function($scope) {
+.controller('counterPage', function($scope, Facebook) {
     $scope.settings = {};
     $scope.settings.time_left = new Date();
     $scope.settings.time_left.setSeconds(0);
@@ -122,10 +115,42 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     $scope.timex = function() {
       window.localStorage.time_left = JSON.stringify($scope.settings.time_left);
       window.localStorage.final_dest = JSON.stringify($scope.settings.final_dest);
+      $scope.getLoginStatus();
+    };
+
+    $scope.getLoginStatus = function() {
+         // $scope.myLikes(userId);
+        Facebook.getLoginStatus(function(response) {
+            if (response.status == 'connected') {
+                console.log("logged in and checking likes")
+                console.log(response);
+            Facebook.api('/me/likes', function(response) {
+            // $scope.user = response;
+            console.log("I LIKEY")
+            console.log(response);
+        });
+            }
+        });
+    };
+})
+
+
+
+.controller('RateCtrl', function($scope) {
+    $scope.place = window.localStorage.place || {};
+    $scope.place.name = 'London Bridge';
+
+    $scope.submit = function() {
+      $http({
+          method: 'POST',
+          url: 'http://api.visitbritain.com/items/' + $scope.place.id + '/love'
+      }).success(function(d){
+        console.log(d);
+        $scope.timeLine = d;
+      });
     };
 
 })
-
 
 .controller('SearchCtrl', function($scope, $http) {
     $scope.timexx = function() {
