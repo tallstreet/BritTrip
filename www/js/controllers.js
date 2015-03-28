@@ -320,11 +320,6 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         timeString += (secs < 10) ? "0" + secs : secs;
         $scope.count_down.timeString = timeString;
 
-        console.log("time string " + $scope.count_down.timeString);
-
-        // if(!$scope.$$phase) {
-        //     $scope.$apply();
-        // }
     }, 1000);
 
     cats = [
