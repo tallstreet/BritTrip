@@ -46,6 +46,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
         templateUrl: "templates/rate.html"
       });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/start');
+    if ( window.localStorage.place ) {
+      $urlRouterProvider.otherwise('/app/rate');
+    } else {
+      $urlRouterProvider.otherwise('/app/start');
+    }
   }
 );
