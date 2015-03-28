@@ -85,6 +85,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
           }
         }
       })
+    .state('app.rate', {
+        url: "/rate",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/rate.html",
+            controller: 'RateCtrl'
+          }
+        }
+      })
     .state('app.cats', {
         url: "/cats",
         views: {

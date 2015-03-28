@@ -29,9 +29,21 @@ h1:first-child {
 	max-width: 18rem;
 }
 
+.button-positive.facebook:hover,
+.button-positive.facebook:active {
+	background: #263D63;
+	border-color: #263D63;
+}
+
 .button-positive.action {
 	background: #EAC435;
 	border-color: #EAC435;
+}
+
+.button-positive.action:hover,
+.button-positive.action:active {
+	background: #F0BD00;
+	border-color: #F0BD00;
 }
 
 .counter-container {
@@ -81,5 +93,34 @@ h1:first-child {
 .counter-container input:focus {
 	background-color: rgba(250,250,250,0.8);
 	color: #383838;
+}
+
+
+.places-container {
+	background: #03CEA4;
+}
+
+.places-container .list.card {
+	display: inline-block;
+	width: 40%;
+	margin: 0;
+}
+
+.places-container i {
+	display: inline-block;
+	font-size: 4em;
+	width: 20%;
+}
+
+.places-container i span {
+	color: #fff;
+	margin-left: -1em;
+	font-size: 0.6em;
+}
+
+.places-container .text {
+	display: inline-block;
+	width: auto;
+	max-width: 78%;
 }
 

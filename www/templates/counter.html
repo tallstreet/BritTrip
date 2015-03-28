@@ -14,14 +14,11 @@
         <li>{{result.description}}</li>
       </ul>
     </fieldset>
-
     <button ng-click="timex()" class="button button-positive action">Submit</button>
   </form>
 
 </ion-content>
-<ion-footer-bar>
-<!-- <div class="button-bar">
+<ion-footer-bar ng-if="count_down.length > 0">
   <button class="button button-energized button-clear counter_active">{{ count_down }}</button>
-</div> -->
 </ion-footer-bar>
 </ion-view>
