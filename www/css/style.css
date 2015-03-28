@@ -202,6 +202,7 @@ h1:first-child {
 .places-container .buttons span {
 	color: #E8430C;
 	border: none;
+	width: auto;
 }
 
 .places-container .buttons a {
@@ -222,7 +223,7 @@ h1:first-child {
 	color: #E8430C;
 }
 
-.rate-container button.step {
+.rate-container a.step {
 	width: 100%;
 	max-width: 100%;
 	margin: 0;
@@ -231,8 +232,8 @@ h1:first-child {
 	border: #FA602D;
 }
 
-.rate-container button.step:hover,
-.rate-container button.step:active {
+.rate-container a.step:hover,
+.rate-container a.step:active {
 	background-color: #BA380D;
 	border: #BA380D;
 }
