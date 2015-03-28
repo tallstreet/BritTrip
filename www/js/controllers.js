@@ -179,7 +179,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
             $scope.final_dest = position.coords;
         });
 
-    $scope.$on('destroy', function() {
+    $scope.$on('$destroy', function() {
         watch.clearWatch();
     });
 
@@ -236,12 +236,13 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
       $scope.place = {'name': 'London Bridge', 'id': 2};
     }
 
-    $scope.$on('destroy', function() {
+    $scope.$on('$destroy', function() {
       window.localStorage.removeItem('place');
     });
 
 
     $scope.rate = function() {
+        window.localStorage.removeItem('place');
         $http({
             method: 'GET',
             url: 'http://api.visitbritain.com/items/' + $scope.place.id + '/love'
