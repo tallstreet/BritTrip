@@ -127,6 +127,23 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 })
 
 
+
+.controller('RateCtrl', function($scope) {
+    $scope.place = window.localStorage.place || {};
+    $scope.place.name = 'London Bridge';
+
+    $scope.submit = function() {
+      $http({
+          method: 'POST',
+          url: 'http://api.visitbritain.com/items/' + $scope.place.id + '/love'
+      }).success(function(d){
+        console.log(d);
+        $scope.timeLine = d;
+      });
+    };
+
+})
+
 .controller('SearchCtrl', function($scope, $http) {
     $scope.timexx = function() {
         console.log(this.time_left);
