@@ -7,7 +7,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     }
 ])
 
-.controller('LoginCtrl', function($scope, $ionicPopup, Facebook) {
+.controller('LoginCtrl', function($scope, $ionicPopup, $state, Facebook) {
         $scope.user = {};
         $scope.logged = false;
 
@@ -31,11 +31,14 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         };
 
         $scope.login = function() {
-            if (!isUserLoggedIn) {
+            if (isUserLoggedIn) {
+                $state.go('app.counter');
+            } else {
                 Facebook.login(function(response) {
                     if (response.status == 'connected') {
                         window.localStorage.fbAccessToken = response.authResponse.accessToken;
                         $scope.logged = true;
+                        $state.go('app.counter');
                     } else {
                         window.localStorage.fbAccessToken = ''
                         $scope.showLoginFailed();
