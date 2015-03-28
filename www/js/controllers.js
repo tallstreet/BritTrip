@@ -248,8 +248,9 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 .controller('SearchCtrl', function($scope, $http) {
     $scope.timexx = function() {
-        console.log(this.time_left);
-        $scope.count_down = this.time_left;
+        // console.log(this.time_left);
+        // $scope.count_down = this.time_left;
+        $scope.count_down = window.localStorage.time_left;
     };
     $scope.time_left = "HH:MM";
     $scope.final_dest = "Heathrow Airport";
@@ -287,7 +288,32 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 })
 
-.controller('placesCtrl', function($scope, $http) {
+.controller('placesCtrl', function($scope, $http, $interval) {
+    $scope.count_down = {};
+
+    $scope.count_down.timeLeft = new Date(JSON.parse(window.localStorage.time_left)).getTime() - new Date().getTime();
+
+    $interval(function() {
+        $scope.count_down.timeLeft = $scope.count_down.timeLeft - 1000;
+
+        var seconds = Math.floor($scope.count_down.timeLeft / 1000);
+        var days = Math.floor(seconds / 86400);
+        var hours = Math.floor((seconds % 86400) / 3600);
+        var minutes = Math.floor(((seconds % 86400) % 3600) / 60);
+        var secs = Math.floor(((seconds % 86400) % 3600) % 60);
+
+        var timeString = '';
+        timeString += hours + " : ";
+        timeString += (minutes < 10) ? "0" + minutes + " : " : minutes + " : ";
+        timeString += (secs < 10) ? "0" + secs : secs;
+        $scope.count_down.timeString = timeString;
+
+        console.log("time string " + $scope.count_down.timeString);
+
+        // if(!$scope.$$phase) {
+        //     $scope.$apply();
+        // }
+    }, 1000);
 
     cats = [
         ["cities and towns", 0],
