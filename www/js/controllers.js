@@ -229,11 +229,11 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 })
 
 
-.controller('RateCtrl', function($scope) {
+.controller('RateCtrl', function($scope, $http, $location) {
     if (window.localStorage.place) {
       $scope.place = JSON.parse(window.localStorage.place);
     } else {
-      $scope.place = {'name': 'London Bridge', 'id': 2};
+      $location.path('/app/start');
     }
 
     $scope.$on('$destroy', function() {
@@ -296,7 +296,11 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 })
 
-.controller('placesCtrl', function($scope, $http, $interval) {
+.controller('placesCtrl', function($scope, $http, $interval, $location) {
+
+      if (window.localStorage.place) {
+        $location.path('/app/rate');
+      }
     $scope.count_down = {};
 
     $scope.count_down.timeLeft = new Date(JSON.parse(window.localStorage.time_left)).getTime() - new Date().getTime();
