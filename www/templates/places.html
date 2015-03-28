@@ -8,7 +8,7 @@
   </div>
 
 
-  <div ng-if="my_lat != null" class="list card">
+  <div ng-if="my_lat != null" class="list card" id="hidden-button">
     <a ng-click="test('{{ my_lat }}','{{ my_long }}',100)" class="item item-icon-left assertive">
       <i class="icon ion-map"></i>
       Show Places <span ng-if="Places != null"> {{Places.data.length}}</span>

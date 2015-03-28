@@ -46,11 +46,13 @@ h1:first-child {
 	border-color: #F0BD00;
 }
 
-.counter-container {
+.counter-container,
+.rate-container {
 	background: #E8430C;
 }
 
-.counter-container h2 {
+.counter-container h2,
+.rate-container h2 {
 	color: #fff;
 	text-align: center;
 	text-transform: uppercase;
@@ -209,3 +211,22 @@ h1:first-child {
 	color: #fff;
 }
 
+.rate-container button.step {
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	text-transform: uppercase;
+	background-color: #FA602D;
+	border: #FA602D;
+}
+
+.rate-container button.step:hover,
+.rate-container button.step:active {
+	background-color: #BA380D;
+	border: #BA380D;
+}
+
+#hidden-button {
+	height: 0;
+	visibility: hidden;
+}

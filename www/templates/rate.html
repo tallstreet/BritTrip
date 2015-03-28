@@ -1,10 +1,22 @@
 <ion-view view-title="Start Page" ng-controller="RateCtrl">
-<ion-content  class="marginDown counter-container">
+<ion-content  class="marginDown rate-container">
   <form>
-    <h2>Did you love {{ place.name }} ?</h2>
-    <button ng-click="rate()" class="button button-positive action">Yes</button>
+    <h2>Share your love about <span>{{ place.name }}<span></h2>
+    <button ng-click="rate()" class="button button-positive action">
+    	<i class="icon ion-android-favorite"></i>
+    	<span>Love Wall</span></button>
+    <button class="button button-positive action">
+    	<i class="icon ion-social-facebook"></i>
+    	<span>Facebook</span>
+    </button>
+    <button class="button button-positive action">
+    	<i class="icon ion-social-twitter"></i>
+    	<span>Twitter</span>
+    </button>
   </form>
-
+  <h2>What's next?</h2>
+  <button class="button button-positive action step">Take me back</button>
+  <button class="button button-positive action step">Show more places</button>
 </ion-content>
 <ion-footer-bar ng-if="count_down.length > 0">
 	<h2>Time left</h2>
