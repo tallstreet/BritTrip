@@ -197,7 +197,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
     $scope.set_location = function(result) {
         $scope.settings.final_dest_text = result.description;
-        $scope.final_dest = $result;
+        $scope.final_dest = result;
     };
 
     $scope.submit = function() {
