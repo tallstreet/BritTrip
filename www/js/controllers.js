@@ -112,20 +112,18 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 .controller('weight', function($scope) {
     // resObj = window.localStorage.fbResponse
     // response = JSON.parse(window.localStorage.fbResponse);
-    cats = [
-        ["cities and towns", 0],
-        ["countryside", 0],
-        ["culture", 0],
-        ["family friendly", 0],
-        ["film and tv", 0],
-        ["food and drinks", 0],
-        ["landmarks", 0],
-        ["music", 0]
-    ];
+    cats = [["cities and towns", 0],
+            ["countryside", 0],
+            ["culture", 0],
+            ["family friendly", 0],
+            ["film and tv", 0],
+            ["food and drinks", 0],
+            ["landmarks", 0],
+            ["music", 0]];
 
-    fbCats = ["cities", "food"];
+    fbCats = window.localStorage.categories; //["cities","food"];
 
-    for (i = 0; i < fbCats.length; i++) {
+    for(i = 0; i<fbCats.length; i++){
         max = 0;
         target = "";
         for (c = 0; c < cats.length; c++) {
@@ -211,9 +209,19 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     $scope.getLikes = function() {
         Facebook.getLoginStatus(function(response) {
             Facebook.api('/me/likes', function(response) {
-                $scope.likes = response;
+
+                $scope.categories = [];
+
+                $scope.dataLength = response.data.length
+                for (i = 0; i < $scope.dataLength; i++) {
+                    $scope.categories.push(response.data[i].category);
+                }
+
+                window.localStorage.categories = $scope.categories;
             });
         });
+
+
     };
 })
 
