@@ -322,6 +322,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     // }
     // topThree = [f1, f2, f3];
 
+    var topThree = _.at( _.sortBy(_.filter(cats, function(item) { return item[1] > 0} ), function(item) { return item[1] * -1; }), 0, 1, 2);
 
     //console.log('huh');
     hello = $http.get('http://api.visitbritain.com/items?type=location&near=-3.393402,57.009337&limit=24&t=A9NsGgd9UmxR');
