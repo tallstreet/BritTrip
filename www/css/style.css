@@ -2,6 +2,7 @@
 
 /* colors */
 /* @blue: #345995 */
+@import url(http://fonts.googleapis.com/css?family=Josefin+Sans|Righteous);
 
 .start_background {
 	background: url("https://c1.staticflickr.com/5/4037/4436811900_bb971be9c5_z.jpg") center center;
@@ -9,12 +10,17 @@
 }
 
 h1:first-child {
-	width: 6em;
+	width: 18rem;
+	font-family: 'Righteous', sans-serif;
 	background-color: #fff;
 	text-align: center;
-	margin: 3.4em auto;
-	padding: 0.4em 0;
-	border-radius: 2.2em;
+	margin: 3em auto;
+	height: 3em;
+	line-height: 3em;
+	border-radius: 0.2em;
+	border-top-left-radius: 2em;
+	border-bottom-right-radius: 2em;
+	color: #E8430C;
 }
 
 .button-positive.facebook, .button-positive.action {
@@ -23,7 +29,7 @@ h1:first-child {
 	font-size: 1.2rem;
 	background: #345995;
 	border-color: #345995;
-	margin: 2em auto;
+	margin: 1.4em auto;
 	padding: 0.4em 1.3em;
 	width: 80%;
 	max-width: 18rem;
