@@ -2,7 +2,7 @@
 <ion-content  class="marginDown rate-container">
   <form>
     <h2>Share your love about <span>{{ place.name }}<span></h2>
-    <button ng-click="rate()" class="button button-positive action">
+    <button ng-click="rate()" ng-show="showrate" class="button button-positive action">
     	<i class="icon ion-android-favorite"></i>
     	<span>Love Wall</span></button>
     <button class="button button-positive action">

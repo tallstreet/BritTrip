@@ -236,6 +236,8 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
       $location.path('/app/start');
     }
 
+    $scope.showrate = true;
+
 
   $scope.count_down = {};
 
@@ -265,6 +267,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 
     $scope.rate = function() {
+        $scope.showrate =false;
         window.localStorage.removeItem('place');
         $http({
             method: 'GET',
