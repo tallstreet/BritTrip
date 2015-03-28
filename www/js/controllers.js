@@ -177,6 +177,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     me = '';
     uurl = 'http://api.visitbritain.com/items?type=location&near=' + pos + '&' + limit + '&' + token;
     cat = 'http://api.visitbritain.com/items?type=category&' + limit + '&' + token;
+
     $scope.test = function(lat, lng, lmt) {
 
         lt = parseFloat(lat);
@@ -228,6 +229,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     };
 
 
+    $scope.test(51.5140186,-0.128734, 100);
 })
 
 .controller('CatsCtrl', function($scope, $stateParams, $http) {

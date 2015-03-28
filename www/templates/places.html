@@ -1,13 +1,13 @@
 <ion-view view-title="Places" ng-controller="GeoCtrl">
 <ion-content  class="marginDown">
 <div ng-if="my_lat == null" class="list card">
-  <a ng-click="test('{{ my_lat }}','{{ my_long }}',25)" class="item item-icon-left assertive" href="#">
+  <a ng-click="test('{{ my_lat }}','{{ my_long }}',25)" class="item item-icon-left assertive">
     <i class="icon ion-load-d"></i>
     Please wait, we are fetching your location
   </a>
 </div>
 <div ng-if="my_lat != null" class="list card">
-  <a ng-click="test('{{ my_lat }}','{{ my_long }}',100)" class="item item-icon-left assertive" href="#">
+  <a ng-click="test('{{ my_lat }}','{{ my_long }}',100)" class="item item-icon-left assertive">
     <i class="icon ion-map"></i>
     Show Places <span ng-if="Places != null"> {{Places.data.length}}</span>
   </a>
