@@ -27,19 +27,18 @@
         <div class="text">
           <h2>{{ i.title }}</h2>
           <p>{{ i.description }}</p>
-          <div>
-            <span>{{timeLine[i.id].distance}} Meters</span>
-            <span>{{ parseInt(timeLine[i.id].time)/60}}</span>
-          </div>
         </div>
         
         
       </div>
+      <div>
+        <span ng-if="timeLine[i.id]">{{timeLine[i.id].distance}}</span>
+        <span  ng-if="timeLine[i.id]">{{ parseInt(timeLine[i.id].time)}}</span>
+        <a class="item item-icon-left assertive" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}">
+          <i class="icon ion-ios-navigate-outline"></i>Take me there
+        </a>
+      </div>
       
-      <a class="item item-icon-left assertive" href="http://maps.google.com/?saddr={{my_lat}},{{my_long}}&daddr={{i.location.lat}},{{i.location.lng}}">
-        <i class="icon ion-ios-navigate-outline"></i>
-        Take Me there
-      </a>
     </div>
   </div>
 

@@ -98,29 +98,44 @@ h1:first-child {
 
 .places-container {
 	background: #03CEA4;
+	width: 100%;
+	
 }
 
 .places-container .list.card {
 	display: inline-block;
-	width: 40%;
+	width: 100%;
 	margin: 0;
 }
 
 .places-container i {
 	display: inline-block;
-	font-size: 4em;
-	width: 20%;
+	vertical-align: top;
+	font-size: 3.4em;
+	width: 12%;
+	color: #CA1551;
+	text-align: center;
+	margin-top: 0;
 }
 
 .places-container i span {
+	display: block;
+	margin-top: -2.2rem;
+	font-size: 1rem;
 	color: #fff;
-	margin-left: -1em;
-	font-size: 0.6em;
 }
 
 .places-container .text {
 	display: inline-block;
 	width: auto;
 	max-width: 78%;
+	padding-left: 5%;
+	
+}
+
+.places-container .text p {
+	overflow: visible;
+	text-overflow: clip;
+	white-space: normal;
 }
 
