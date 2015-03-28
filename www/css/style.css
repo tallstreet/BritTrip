@@ -109,6 +109,7 @@ h1:first-child {
 
 .places-container .description {
 	border-bottom: none;
+	margin-bottom: 0.2em;
 }
 
 .places-container i {
@@ -136,6 +137,11 @@ h1:first-child {
 	border-bottom: none;
 }
 
+.places-container .text h2 {
+	font-size: 1.2em;
+	line-height: 2em;
+}
+
 .places-container .text p {
 	overflow: visible;
 	text-overflow: clip;
@@ -143,21 +149,30 @@ h1:first-child {
 }
 
 .places-container .buttons {
+	width: 98%;
 	text-align: right;
+	margin: 0 auto;
 }
 
 .places-container .buttons span,
 .places-container .buttons a {
 	display: inline-block;
 	max-width: 32%;
+	width: 32%;
 	text-align: left;
 	white-space: normal;
 	/*border: none;*/
 }
 
+.places-container .buttons span {
+	color: #E8430C;
+	border: none;
+}
+
 .places-container .buttons a {
 	background: #E8430C;
 	color: #fff;
+	margin: 0;
 }
 
 .places-container .buttons a i {
