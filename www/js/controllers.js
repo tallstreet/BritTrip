@@ -230,13 +230,13 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 
 
-.controller('RateCtrl', function($scope) {
+.controller('RateCtrl', function($scope, $http) {
     $scope.place = window.localStorage.place || {};
     $scope.place.name = 'London Bridge';
 
-    $scope.submit = function() {
+    $scope.rate = function() {
         $http({
-            method: 'POST',
+            method: 'GET',
             url: 'http://api.visitbritain.com/items/' + $scope.place.id + '/love'
         }).success(function(d) {
             console.log(d);
@@ -402,43 +402,76 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(r) {
-            locs = {};
-            for (var i = 0; i < r.data.length; i++) {
-                if (r.data[i].location != null) {
-                    locs[i] = [r.data[i].location.lat, r.data[i].location.lng];
-                }
+                locs = {};
+                for (var i = 0; i < r.data.length; i++) {
+                    if (r.data[i].location != null) {
+                        locs[i] = [r.data[i].location.lat, r.data[i].location.lng];
+                    }
 
-            }
-            $http({
-                method: 'POST',
-                url: 'http://api.traveltimeapp.com/v3/routes',
-                header: {
-                    "Content-Type": "application/json"
-                },
-                data: {
-                    "app_id": "893138db",
-                    "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
-                    "target": {
-                        "coords": [lt, ln],
-                        "start_time": "2015-03-28T07:15:00.000Z",
-                        "travel_time": 30000,
-                        "mode": "walking_bus"
+                }
+                $http({
+                    method: 'POST',
+                    url: 'http://api.traveltimeapp.com/v3/routes',
+                    header: {
+                        "Content-Type": "application/json"
                     },
-                    "points": locs
-                }
-            }).success(function(d) {
-                console.log('D starts here');
+                    data: {
+                        "app_id": "893138db",
+                        "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
+                        "target": {
+                            "coords": [lt, ln],
+                            "start_time": "2015-03-28T07:15:00.000Z",
+                            "travel_time": 30000,
+                            "mode": "walking_bus"
+                        },
+                        "points": locs
+                    }
+                }).success(function(d) {
+                    console.log('D starts here');
+                    console.log(d);
+                    $scope.timeLine = d;
+                })
+                console.log(r);
+                $scope.me = r;
+                $scope.Places = r;
+
+                ///// hey start here shahin
+
+                $http({
+                        method: 'POST',
+                        url: 'http://api.traveltimeapp.com/v3/time_filter',
+                        header: {
+                            "Content-Type": "application/json"
+                        },
+                        data: {
+                            "app_id": "893138db",
+                            "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
+                            "points": locs
+                        },
+                        "sources": {
+                            "source1": {
+                                "travel_time": 3600,
+                                "coords": [lt, ln],
+                                "mode": "walking_bus",
+                                "properties": ["time"],
+                                "start_time": new Date()
+                            }
+                        },
+                        "destinations": {},
+                        "remove_wait_time": false
+
+                
+                }).success(function(d) {
                 console.log(d);
-                $scope.timeLine = d;
-            })
-            console.log(r);
-            $scope.me = r;
-            $scope.Places = r;
+                $scope.hey = "shahinhello"; //shahin attempting to make something useful-->
+            });
+
         });
-    };
+
+};
 
 
-    $scope.test(51.5140186, -0.128734, 100);
+$scope.test(51.5140186, -0.128734, 100);
 })
 
 .controller('CatsCtrl', function($scope, $stateParams, $http) {
