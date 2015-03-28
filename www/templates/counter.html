@@ -11,14 +11,14 @@
       <label for="finalDestination">What is your final location?</label>
        <input id="finalDestination" type="text" ng-model="settings.final_dest_text" ng-change="on_search()" placeholder="{{ settings.final_dest }}">
         <ul class="typeahead" >
-          <li ng-repeat="result in results" ng-click="set_location()">{{result.description}}</li>
+          <li ng-repeat="result in results" ng-click="set_location(result)">{{result.description}}</li>
         </ul>
       <label for="useCurrent">
         Use current location
         <input id="useCurrent" type="checkbox"></input>
         <i class="icon ion-ios-navigate"></i>
       </label>
-      
+
     </fieldset>
     <button ng-click="submit()" class="button button-positive action">Submit</button>
   </form>
