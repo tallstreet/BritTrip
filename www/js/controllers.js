@@ -252,6 +252,10 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         });
     };
 
+    $scope.clear = function() {
+        window.localStorage.removeItem('place');
+    };
+
 })
 
 .controller('SearchCtrl', function($scope, $http) {
