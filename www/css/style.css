@@ -29,9 +29,21 @@ h1:first-child {
 	max-width: 18rem;
 }
 
+.button-positive.facebook:hover,
+.button-positive.facebook:active {
+	background: #263D63;
+	border-color: #263D63;
+}
+
 .button-positive.action {
 	background: #EAC435;
 	border-color: #EAC435;
+}
+
+.button-positive.action:hover,
+.button-positive.action:active {
+	background: #F0BD00;
+	border-color: #F0BD00;
 }
 
 .counter-container {
