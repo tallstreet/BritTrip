@@ -28,8 +28,6 @@
           <h2>{{ i.title }}</h2>
           <p>{{ i.description }}</p>
         </div>
-
-
       </div>
       <div class="buttons">
         <span ng-if="timeLine[i.id].distance > 0" class="item"><i class="icon ion-android-walk"></i>{{timeLine[i.id].distance}} m</span>
@@ -43,7 +41,7 @@
 
 
 </ion-content>
-<ion-footer-bar ng-if="count_down.timeLeft > 0">
+<ion-footer-bar>
   <div class="button button-energized button-clear counter_active">{{ count_down.timeString }}</div>
 </ion-footer-bar>
 </ion-view>
