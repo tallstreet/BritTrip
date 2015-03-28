@@ -37,7 +37,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                         $scope.showLoginFailed();
                         $scope.logged = false;
                     }
-                });
+                }, {scope: 'user_about_me, user_likes'});
             }
         };
 
@@ -115,21 +115,14 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     $scope.timex = function() {
       window.localStorage.time_left = JSON.stringify($scope.settings.time_left);
       window.localStorage.final_dest = JSON.stringify($scope.settings.final_dest);
-      $scope.getLoginStatus();
+      $scope.getLikes();
     };
 
-    $scope.getLoginStatus = function() {
-         // $scope.myLikes(userId);
+    $scope.getLikes = function() {
         Facebook.getLoginStatus(function(response) {
-            if (response.status == 'connected') {
-                console.log("logged in and checking likes")
-                console.log(response);
             Facebook.api('/me/likes', function(response) {
-            // $scope.user = response;
-            console.log("I LIKEY")
-            console.log(response);
-        });
-            }
+                $scope.likes = response;
+            });
         });
     };
 })
