@@ -456,7 +456,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                             "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
                             "target": {
                                 "coords": [lt, ln],
-                                "start_time": "2015-03-28T07:15:00.000Z",
+                                "start_time": new Date(),
                                 "travel_time": 30000,
                                 "mode": "walking_bus"
                             },
@@ -472,40 +472,37 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                     $scope.Places = r;
 
                     ///// hey start here shahin
-
-                    $http(
-                        {
-                            method: 'POST',
-                            url: 'http://api.traveltimeapp.com/v3/time_filter',
-                            header: {
-                                "Content-Type": "application/json"
-                            },
-                            data: {
-                                "app_id": "893138db",
-                                "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
-                                "points": locs,
-                                "sources": {
-                                    "source1": {
-                                        "travel_time": 3600,
-                                        "coords": [lt, ln],
-                                        "mode": "walking_bus",
-                                        "properties": ["time", "distance"],
-                                        "start_time": new Date()
-                                    }
-                                },
-                                "destinations": {},
-                                "remove_wait_time": false
+                    $http({
+                          method: 'POST',
+                          url: 'http://api.traveltimeapp.com/v3/time_filter',
+                          header: {
+                              "Content-Type": "application/json"
+                          },
+                          data: {
+                              "app_id": "893138db",
+                              "app_key": "1f666db85092e28ea3ac921ea0c95fa6",
+                              "points": locs,
+                              "sources": {
+                                  "source1": {
+                                      "travel_time": 3600,
+                                      "coords": [lt, ln],
+                                      "mode": "walking_bus",
+                                      "properties": ["time", "distance"],
+                                      "start_time": new Date()
+                                  }
+                              },
+                              "destinations": {},
+                              "remove_wait_time": false
 
 
-                            }
-                        }).success(function(d) {
-                            console.log(d);
-                            $scope.robert = d;
-                            $scope.hey = "shahinhello"; //shahin attempting to make something useful-->
-                        });
+                          }
+                          }).success(function(d) {
+                          console.log(d);
+                          $scope.robert = d;
+                          $scope.hey = "shahinhello"; //shahin attempting to make something useful-->
+                      });
 
-                    });
-
+                  });
             };
 
     $scope.save_place = function(place) {
