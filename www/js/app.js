@@ -113,10 +113,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
         }
       });
     // if none of the above states are matched, use this as the fallback
-    if ( window.localStorage.place ) {
-      $urlRouterProvider.otherwise('/app/rate');
-    } else {
-      $urlRouterProvider.otherwise('/app/start');
-    }
+    $urlRouterProvider.otherwise('/app/search');
   }
 );
