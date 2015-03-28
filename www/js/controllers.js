@@ -16,7 +16,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     var minutes = Math.floor(((seconds % 86400) % 3600) / 60);
     var secs = Math.floor(((seconds % 86400) % 3600) % 60);
     var timeString = '';
-    
+
     timeString += hours + " : ";
     timeString += (minutes < 10) ? "0" + minutes + " : " : minutes + " : ";
     timeString += (secs < 10) ? "0" + secs : secs;
@@ -245,8 +245,15 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 
 .controller('RateCtrl', function($scope) {
-    $scope.place = window.localStorage.place || {};
-    $scope.place.name = 'London Bridge';
+    if (window.localStorage.place) {
+      $scope.place = JSON.parse(window.localStorage.place);
+    } else {
+      $scope.place = {'name': 'London Bridge', 'id': 2};
+    }
+
+    $scope.$on('destroy', function() {
+      window.localStorage.removeItem('place');
+    });
 
     $scope.submit = function() {
         $http({
@@ -428,6 +435,12 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         });
     };
 
+    $scope.save_place = function(place) {
+      window.localStorage.place = JSON.stringify({
+        'name': place.title,
+        'id': place.id
+      });
+    };
 
     $scope.test(51.5140186, -0.128734, 100);
 })
