@@ -1,12 +1,13 @@
-angular.module('starter.controllers', ['facebook'])
+angular.module('starter.controllers', ['facebook', 'ionic'])
 
 //angular.module('starter.controllers', [])
 
 .config(['FacebookProvider', function(FacebookProvider) {
     FacebookProvider.init('456458934502537');
-}])
+    }
+])
 
-.controller('LoginCtrl', function($scope, Facebook) {
+.controller('LoginCtrl', function($scope, $ionicPopup, $state, Facebook) {
         $scope.user = {};
         $scope.logged = false;
 
@@ -30,13 +31,28 @@ angular.module('starter.controllers', ['facebook'])
         };
 
         $scope.login = function() {
-            if (!isUserLoggedIn) {
+            if (isUserLoggedIn) {
+                $state.go('app.counter');
+            } else {
                 Facebook.login(function(response) {
                     if (response.status == 'connected') {
+                        window.localStorage.fbAccessToken = response.authResponse.accessToken;
                         $scope.logged = true;
+                        $state.go('app.counter');
+                    } else {
+                        window.localStorage.fbAccessToken = ''
+                        $scope.showLoginFailed();
+                        $scope.logged = false;
                     }
                 });
             }
+        };
+
+        $scope.showLoginFailed = function() {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Cats are evil',
+                template: 'Login failed.'
+            });
         };
     }
 )
@@ -164,6 +180,7 @@ angular.module('starter.controllers', ['facebook'])
     me = '';
     uurl = 'http://api.visitbritain.com/items?type=location&near=' + pos + '&' + limit + '&' + token;
     cat = 'http://api.visitbritain.com/items?type=category&' + limit + '&' + token;
+
     $scope.test = function(lat, lng, lmt) {
 
         lt = parseFloat(lat);
@@ -215,6 +232,7 @@ angular.module('starter.controllers', ['facebook'])
     };
 
 
+    $scope.test(51.5140186,-0.128734, 100);
 })
 
 .controller('CatsCtrl', function($scope, $stateParams, $http) {
