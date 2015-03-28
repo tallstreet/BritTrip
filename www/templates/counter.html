@@ -4,12 +4,12 @@
     <h2>Plan your trip</h2>
     <fieldset class="card">
       <label for="timeSetter">What is the latest time you have to be back?</label>
-      <input id="timeSetter" type="time" ng-model="time_left"  placeholder="HH:MM">
+      <input id="timeSetter" type="time" ng-model="settings.time_left"  placeholder="HH:MM">
     </fieldset>
     
     <fieldset class="card">
       <label for="finalDestination">What is your final location?</label>
-      <input id="finalDestination" type="text" ng-model="final_dest" placeholder="{{ final_dest }}">
+      <input id="finalDestination" type="text" ng-model="settings.final_dest" placeholder="{{ settings.final_dest }}">
   
     </fieldset>
 
