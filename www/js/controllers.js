@@ -2,55 +2,57 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 //angular.module('starter.controllers', [])
 
-.config(['FacebookProvider', function(FacebookProvider) {
-    FacebookProvider.init('456458934502537');
+.config(['FacebookProvider',
+    function(FacebookProvider) {
+        FacebookProvider.init('456458934502537');
     }
 ])
 
 .controller('LoginCtrl', function($scope, $ionicPopup, $state, Facebook) {
-        $scope.user = {};
-        $scope.logged = false;
+    $scope.user = {};
+    $scope.logged = false;
 
-        $scope.$watch(
-            function() {
-                return Facebook.isReady();
-            },
-            function(newVal) {
-                if (newVal)
-                    $scope.facebookReady = true;
-            }
-        );
+    $scope.$watch(
+        function() {
+            return Facebook.isReady();
+        },
+        function(newVal) {
+            if (newVal)
+                $scope.facebookReady = true;
+        }
+    );
 
-        var isUserLoggedIn = false;
+    var isUserLoggedIn = false;
 
-        $scope.login = function() {
-            if (isUserLoggedIn) {
-                $state.go('app.counter');
-            } else {
-                Facebook.login(function(response) {
-                    if (response.status == 'connected') {
-                        window.localStorage.fbAccessToken = response.authResponse.accessToken;
-                        window.localStorage.fbResponse = response;
-                        $scope.logged = true;
-                        $state.go('app.counter');
-                    } else {
-                        window.localStorage.fbAccessToken = ''
-                        window.localStorage.fbResponse = {};
-                        $scope.showLoginFailed();
-                        $scope.logged = false;
-                    }
-                }, {scope: 'user_about_me, user_likes'});
-            }
-        };
-
-        $scope.showLoginFailed = function() {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Cats are evil',
-                template: 'Login failed.'
+    $scope.login = function() {
+        if (isUserLoggedIn) {
+            $state.go('app.counter');
+        } else {
+            Facebook.login(function(response) {
+                if (response.status == 'connected') {
+                    window.localStorage.fbAccessToken = response.authResponse.accessToken;
+                    window.localStorage.fbResponse = response;
+                    $scope.logged = true;
+                    $state.go('app.counter');
+                } else {
+                    window.localStorage.fbAccessToken = ''
+                    window.localStorage.fbResponse = {};
+                    $scope.showLoginFailed();
+                    $scope.logged = false;
+                }
+            }, {
+                scope: 'user_about_me, user_likes'
             });
-        };
-    }
-)
+        }
+    };
+
+    $scope.showLoginFailed = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Cats are evil',
+            template: 'Login failed.'
+        });
+    };
+})
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
     // Form data for the login modal
@@ -110,23 +112,28 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 .controller('weight', function($scope) {
     // resObj = window.localStorage.fbResponse
     // response = JSON.parse(window.localStorage.fbResponse);
-    cats = [["cities and towns", 0],
-            ["countryside", 0],
-            ["culture", 0],
-            ["family friendly", 0],
-            ["film and tv", 0],
-            ["food and drinks", 0],
-            ["landmarks", 0],
-            ["music", 0]];
+    cats = [
+        ["cities and towns", 0],
+        ["countryside", 0],
+        ["culture", 0],
+        ["family friendly", 0],
+        ["film and tv", 0],
+        ["food and drinks", 0],
+        ["landmarks", 0],
+        ["music", 0]
+    ];
 
-    fbCats = ["cities","food"];
+    fbCats = ["cities", "food"];
 
-    for(i = 0; i<fbCats.length; i++){
+    for (i = 0; i < fbCats.length; i++) {
         max = 0;
         target = "";
-        for(c = 0; c < cats.length; c++){
+        for (c = 0; c < cats.length; c++) {
             var l = new Levenshtein(fbCats[i], cats[c][0]);
-            if(l > max){ max = l; target = c}
+            if (l > max) {
+                max = l;
+                target = c
+            }
         }
         cats[target][1] += max;
     }
@@ -173,30 +180,32 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         });
 
     $scope.$on('destroy', function() {
-      watch.clearWatch();
+        watch.clearWatch();
     });
 
     $scope.on_search = function() {
-      var service = new google.maps.places.AutocompleteService();
-      service.getQueryPredictions({ input: $scope.settings.final_dest_text }, function(predictions, status) {
-        if (status != google.maps.places.PlacesServiceStatus.OK) {
-          console.log(status);
-          return;
-        }
+        var service = new google.maps.places.AutocompleteService();
+        service.getQueryPredictions({
+            input: $scope.settings.final_dest_text
+        }, function(predictions, status) {
+            if (status != google.maps.places.PlacesServiceStatus.OK) {
+                console.log(status);
+                return;
+            }
 
-        $scope.results = predictions;
-      });
+            $scope.results = predictions;
+        });
     };
 
-    $scope.set_location = function ($result) {
-      $scope.final_dest = $result;
+    $scope.set_location = function($result) {
+        $scope.final_dest = $result;
     };
 
     $scope.submit = function() {
-      window.localStorage.time_left = JSON.stringify($scope.settings.time_left);
-      window.localStorage.final_dest = JSON.stringify($scope.settings.final_dest);
-      $scope.getLikes();
-      $state.go('app.places');
+        window.localStorage.time_left = JSON.stringify($scope.settings.time_left);
+        window.localStorage.final_dest = JSON.stringify($scope.settings.final_dest);
+        $scope.getLikes();
+        $state.go('app.places');
     };
 
     $scope.getLikes = function() {
@@ -215,13 +224,13 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     $scope.place.name = 'London Bridge';
 
     $scope.submit = function() {
-      $http({
-          method: 'POST',
-          url: 'http://api.visitbritain.com/items/' + $scope.place.id + '/love'
-      }).success(function(d){
-        console.log(d);
-        $scope.timeLine = d;
-      });
+        $http({
+            method: 'POST',
+            url: 'http://api.visitbritain.com/items/' + $scope.place.id + '/love'
+        }).success(function(d) {
+            console.log(d);
+            $scope.timeLine = d;
+        });
     };
 
 })
@@ -268,7 +277,45 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 })
 
 .controller('placesCtrl', function($scope, $http) {
-    console.log('huh');
+
+    cats = [
+        ["cities and towns", 0],
+        ["countryside", 0],
+        ["culture", 0],
+        ["family friendly", 0],
+        ["film and tv", 0],
+        ["food and drinks", 0],
+        ["landmarks", 0],
+        ["music", 0]
+    ];
+
+    fbCats = ["cities", "food"];
+
+    for (i = 0; i < fbCats.length; i++) {
+        max = 0;
+        target = "";
+        for (c = 0; c < cats.length; c++) {
+            var l = new Levenshtein(fbCats[i], cats[c][0]);
+            if (l > max) {
+                max = l;
+                target = c
+            }
+        }
+        cats[target][1] += max;
+    }
+
+    // f1 = 0;
+    // f2 = 0;
+    // f3 = 0;
+    // for(i = 0; i < cats.length; i++){
+    //     if(cats[i][1] > f1) {f1 = cats[i][1]}
+    //         for
+
+    // }
+    // topThree = [f1, f2, f3];
+
+
+    //console.log('huh');
     hello = $http.get('http://api.visitbritain.com/items?type=location&near=-3.393402,57.009337&limit=24&t=A9NsGgd9UmxR');
 
     //console.log(hello);
@@ -289,6 +336,18 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         me = '';
         uurl = 'http://api.visitbritain.com/items?type=location&near=' + ln + ',' + lt + '&' + limit + '&' + token;
         console.log(uurl);
+
+        $http({
+            method: 'GET',
+            url: uurl,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(m){
+
+        })
+
+        ////////// safe
         $http({
             method: 'GET',
             url: uurl,
@@ -307,7 +366,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                 method: 'POST',
                 url: 'http://api.traveltimeapp.com/v3/routes',
                 header: {
-                  "Content-Type": "application/json"
+                    "Content-Type": "application/json"
                 },
                 data: {
                     "app_id": "893138db",
@@ -320,9 +379,9 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                     },
                     "points": locs
                 }
-            }).success(function(d){
-              console.log(d);
-              $scope.timeLine = d;
+            }).success(function(d) {
+                console.log(d);
+                $scope.timeLine = d;
             })
             console.log(r);
             $scope.me = r;
@@ -331,7 +390,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     };
 
 
-    $scope.test(51.5140186,-0.128734, 100);
+    $scope.test(51.5140186, -0.128734, 100);
 })
 
 .controller('CatsCtrl', function($scope, $stateParams, $http) {

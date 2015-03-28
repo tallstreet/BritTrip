@@ -1,36 +1,15 @@
-<ion-view view-title="Start Page" ng-controller="CatsCtrl">
+<ion-view view-title="Start Page" ng-controller="LoginCtrl">
   <ion-content class="start_background">
-
-    <!-- <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
-      </ion-item>
-    </ion-list> -->
-    <div class="row"><br></div>
     <div class="row row-center">
     	<div class="col">
-    		<!-- <div class="list"> -->
-			  <label class="item item-input">
-			    <input type="text" placeholder="Username">
-			  </label>
-			  <label class="item item-input">
-			    <input type="password" placeholder="Password">
-			  </label>
-			<!-- </div> -->
+        <h1>BritTrip</h1>
+    		<button ng-click="login()" id="fbLoginButton" class="button button-positive facebook">
+                Login with Facebook
+            </button>
+        <button class="button button-positive action">Sign up</button>
     	</div>
-	</div>
-	<div class="row row-bottom">
-		<div class="col">
-			<button ng-click="cat()" class="button button-block button button-positive">
-			  Login
-			</button>
-		</div>
-	</div>
-	
+    </div>
+
   </ion-content>
-  <ion-footer-bar>
-        <div class="button-bar">
-          <button class="button button-energized button-clear">Signup</button>
-        </div>
-   </ion-footer-bar>
+  
 </ion-view>
