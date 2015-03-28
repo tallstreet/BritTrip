@@ -20,88 +20,99 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+.config(
+  function($stateProvider, $urlRouterProvider) {
+    $stateProvider
 
-  .state('app', {
-    url: "/app",
-    abstract: true,
-    templateUrl: "templates/menu.html",
-    controller: 'AppCtrl'
-  })
+    .state('app', {
+      url: "/app",
+      abstract: true,
+      templateUrl: "templates/menu.html",
+      controller: 'AppCtrl'
+    })
 
-  .state('app.search', {
-    url: "/search",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/search.html"
-      }
-    }
-  })
-
-  .state('app.browse', {
-    url: "/browse",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/browse.html"
-      }
-    }
-  })
-    .state('app.playlists', {
-      url: "/playlists",
+    .state('app.browse', {
+      url: "/browse",
       views: {
         'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/browse.html"
         }
       }
     })
+      .state('app.playlists', {
+        url: "/playlists",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/playlists.html",
+            controller: 'PlaylistsCtrl'
+          }
+        }
+      })
 
-  .state('app.single', {
-    url: "/playlists/:playlistId",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
-      }
-    }
-  })
-  .state('app.start', {
-      url: "/start",
+    .state('app.single', {
+      url: "/playlists/:playlistId",
       views: {
         'menuContent': {
-          templateUrl: "templates/start.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/playlist.html",
+          controller: 'PlaylistCtrl'
         }
       }
     })
-  .state('app.counter', {
-      url: "/counter",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/counter.html",
-          controller: 'PlaylistsCtrl'
+    .state('app.start', {
+        url: "/start",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/start.html",
+            controller: 'LoginCtrl'
+          }
         }
-      }
-    })
-  .state('app.places', {
-      url: "/places",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/places.html",
-          controller: 'placesCtrl'
+      })
+    .state('app.counter', {
+        url: "/counter",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/counter.html",
+            controller: 'PlaylistsCtrl'
+          }
         }
-      }
-    })
-  .state('app.cats', {
-      url: "/cats",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/cats.html",
-          controller: 'CatsCtrl'
+      })
+    .state('app.places', {
+        url: "/places",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/places.html",
+            controller: 'placesCtrl'
+          }
         }
-      }
-    });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/cats');
-});
+      })
+    .state('app.rate', {
+        url: "/rate",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/rate.html",
+            controller: 'RateCtrl'
+          }
+        }
+      })
+    .state('app.cats', {
+        url: "/cats",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/cats.html",
+            controller: 'CatsCtrl'
+          }
+        }
+      })
+    .state('app.search', {
+        url: "/search",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/search.html",
+            controller: 'SearchCtrl'
+          }
+        }
+      });
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/search');
+  }
+);
