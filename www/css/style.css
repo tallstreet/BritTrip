@@ -95,3 +95,32 @@ h1:first-child {
 	color: #383838;
 }
 
+
+.places-container {
+	background: #03CEA4;
+}
+
+.places-container .list.card {
+	display: inline-block;
+	width: 40%;
+	margin: 0;
+}
+
+.places-container i {
+	display: inline-block;
+	font-size: 4em;
+	width: 20%;
+}
+
+.places-container i span {
+	color: #fff;
+	margin-left: -1em;
+	font-size: 0.6em;
+}
+
+.places-container .text {
+	display: inline-block;
+	width: auto;
+	max-width: 78%;
+}
+
