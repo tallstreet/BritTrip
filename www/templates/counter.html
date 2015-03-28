@@ -1,23 +1,25 @@
 <ion-view view-title="Start Page" ng-controller="counterPage">
-<ion-content  class="marginDown">
-<form>
+<ion-content  class="marginDown counter-container">
+  <form>
+    <h2>Plan your trip</h2>
+    <fieldset class="card">
+      <label for="timeSetter">What is the latest time you have to be back?</label>
+      <input id="timeSetter" type="time" ng-model="time_left"  placeholder="HH:MM">
+    </fieldset>
+    
+    <fieldset class="card">
+      <label for="finalDestination">What is your final location?</label>
+      <input id="finalDestination" type="text" ng-model="final_dest" placeholder="{{ final_dest }}">
+  
+    </fieldset>
 
-  <label class="item item-input" for="timeSetter">What is the latest time you have to be back?</label>
-  <input id="timeSetter" type="time" ng-model="time_left"  placeholder="HH:MM">
-
-  <label class="item item-input" for="finalDestination">What is your final location?</label>
-  <input id="finalDestination" type="text" ng-model="final_dest" placeholder="{{ final_dest }}">
-
-  <button ng-click="timex()" class="button button-block button button-positive">Submit</button>
-</form>
-
-
-
+    <button ng-click="timex()" class="button button-positive action">Submit</button>
+  </form>
 
 </ion-content>
 <ion-footer-bar>
-<div class="button-bar">
+<!-- <div class="button-bar">
   <button class="button button-energized button-clear counter_active">{{ count_down }}</button>
-</div>
+</div> -->
 </ion-footer-bar>
 </ion-view>
