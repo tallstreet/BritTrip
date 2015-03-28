@@ -179,7 +179,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
             $scope.final_dest = position.coords;
         });
 
-    $scope.$on('$destroy', function() {
+    $scope.$on('destroy', function() {
         watch.clearWatch();
     });
 
@@ -229,20 +229,12 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 })
 
 
-.controller('RateCtrl', function($scope, $http, $location) {
-    if (window.localStorage.place) {
-      $scope.place = JSON.parse(window.localStorage.place);
-    } else {
-      $location.path('/app/start');
-    }
 
-    $scope.$on('$destroy', function() {
-      window.localStorage.removeItem('place');
-    });
-
+.controller('RateCtrl', function($scope, $http) {
+    $scope.place = window.localStorage.place || {};
+    $scope.place.name = 'London Bridge';
 
     $scope.rate = function() {
-        window.localStorage.removeItem('place');
         $http({
             method: 'GET',
             url: 'http://api.visitbritain.com/items/' + $scope.place.id + '/love'
@@ -300,17 +292,8 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 
 })
 
-<<<<<<< HEAD
 .controller('placesCtrl', function($scope, $http, $interval) {
         $scope.count_down = {};
-=======
-.controller('placesCtrl', function($scope, $http, $interval, $location) {
-
-      if (window.localStorage.place) {
-        $location.path('/app/rate');
-      }
-    $scope.count_down = {};
->>>>>>> 0192a356502fe71e6a225677abcec6e9d3c6f945
 
         $scope.count_down.timeLeft = new Date(JSON.parse(window.localStorage.time_left)).getTime() - new Date().getTime();
 
@@ -329,29 +312,12 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
             timeString += (secs < 10) ? "0" + secs : secs;
             $scope.count_down.timeString = timeString;
 
-<<<<<<< HEAD
             console.log("time string " + $scope.count_down.timeString);
 
             // if(!$scope.$$phase) {
             //     $scope.$apply();
             // }
         }, 1000);
-=======
-    }, 1000);
-
-    cats = [
-        ["cities and towns", 0],
-        ["countryside", 0],
-        ["culture", 0],
-        ["family friendly", 0],
-        ["film and tv", 0],
-        ["food and drinks", 0],
-        ["landmarks", 0],
-        ["music", 0]
-    ];
-
-    fbCats = ["cities", "food"];
->>>>>>> 0192a356502fe71e6a225677abcec6e9d3c6f945
 
         cats = [
             ["cities and towns", 0],
@@ -523,31 +489,17 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                                 "destinations": {},
                                 "remove_wait_time": false
 
-<<<<<<< HEAD
                             }
                             }).success(function(d) {
                             console.log(d);
                             $scope.robert = d;
                             $scope.hey = "shahinhello"; //shahin attempting to make something useful-->
                         });
-=======
-
-                }).success(function(d) {
-                console.log(d);
-                $scope.hey = "shahinhello"; //shahin attempting to make something useful-->
-            });
->>>>>>> 0192a356502fe71e6a225677abcec6e9d3c6f945
 
                     });
 
             };
 
-    $scope.save_place = function(place) {
-      window.localStorage.place = JSON.stringify({
-        'name': place.title,
-        'id': place.id
-      });
-    };
 
             $scope.test(51.5140186, -0.128734, 100);
         })
