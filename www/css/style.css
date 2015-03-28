@@ -1,23 +1,33 @@
 /* Empty. Add your own CSS if you like */
 
+/* colors */
+/* @blue: #345995 */
+
 .start_background {
-	background-color: red;
-	background-image: url("https://c1.staticflickr.com/5/4037/4436811900_bb971be9c5_z.jpg");
-	filter: blur(0px);
-	-webkit-filter: blur(0px);
-	/*-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);*/
+	background: url("https://c1.staticflickr.com/5/4037/4436811900_bb971be9c5_z.jpg") center center;
+	background-size: cover;
 }
 
-.marginDown {
-	/*margin-top: 50px;*/
+h1:first-child {
+	width: 6em;
+	background-color: #fff;
+	text-align: center;
+	margin: 3.4em auto;
+	padding: 0.4em 0;
+	border-radius: 2.2em;
 }
 
-button {
-	color: red;
+.button-positive.facebook, .button-positive.signup {
+	display: block;
+	font-size: 1.2rem;
+	background: #345995;
+	border-color: #345995;
+	margin: 2em auto;
+	padding: 0.4em 1.3em;
+	width: 16em;
 }
 
-h1 {
-	color: red;
+.button-positive.signup {
+	background: #EAC435;
+	border-color: #EAC435;
 }
