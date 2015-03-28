@@ -229,12 +229,35 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 })
 
 
-.controller('RateCtrl', function($scope, $http, $location) {
+.controller('RateCtrl', function($scope, $http, $location, $interval) {
     if (window.localStorage.place) {
       $scope.place = JSON.parse(window.localStorage.place);
     } else {
       $location.path('/app/start');
     }
+
+
+  $scope.count_down = {};
+
+      $scope.count_down.timeLeft = new Date(JSON.parse(window.localStorage.time_left)).getTime() - new Date().getTime();
+
+      $interval(function() {
+          $scope.count_down.timeLeft = $scope.count_down.timeLeft - 1000;
+
+          var seconds = Math.floor($scope.count_down.timeLeft / 1000);
+          var days = Math.floor(seconds / 86400);
+          var hours = Math.floor((seconds % 86400) / 3600);
+          var minutes = Math.floor(((seconds % 86400) % 3600) / 60);
+          var secs = Math.floor(((seconds % 86400) % 3600) % 60);
+
+          var timeString = '';
+          timeString += hours + " : ";
+          timeString += (minutes < 10) ? "0" + minutes + " : " : minutes + " : ";
+          timeString += (secs < 10) ? "0" + secs : secs;
+          $scope.count_down.timeString = timeString;
+      }, 1000);
+
+
 
     $scope.$on('$destroy', function() {
       window.localStorage.removeItem('place');

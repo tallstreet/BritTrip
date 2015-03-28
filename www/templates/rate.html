@@ -18,10 +18,9 @@
   <a class="button button-positive action step" ng-click="clear()" href="#/app/start">Take me back</a>
   <a class="button button-positive action step" ng-click="clear()" href="#/app/places">Show more places</a>
 </ion-content>
-<ion-footer-bar ng-controller="counterPage">
-	<p>Time left until connection:</p>
-	<p>{{ count_down.timeString }}</p>
-  <!-- <button class="button button-energized button-clear counter_active">{{ count_down.timeString }}</button> -->
+
+<ion-footer-bar>
+  <div class="button button-energized button-clear counter_active">{{ count_down.timeString }}</div>
 </ion-footer-bar>
 <div ng-controller="weight">{{dist}}</div>
 </ion-view>
