@@ -136,14 +136,63 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
     console.log(cats);
 })
 
-.controller('counterPage', function($scope, $state, Facebook) {
+.controller('counterPage', function($scope, $state, Facebook, $cordovaGeolocation) {
     $scope.settings = {};
     $scope.settings.time_left = new Date();
     $scope.settings.time_left.setSeconds(0);
     $scope.settings.time_left.setMilliseconds(0);
-    $scope.settings.final_dest = "Heathrow Airport";
+    $scope.settings.final_dest_text = "";
 
-    $scope.timex = function() {
+    var posOptions = {
+        timeout: 10000,
+        enableHighAccuracy: false
+    };
+    $cordovaGeolocation
+        .getCurrentPosition(posOptions)
+        .then(function(position) {
+            $scope.final_dest = position.coords;
+        }, function(err) {
+            // error
+        });
+
+
+    var watchOptions = {
+        frequency: 1000,
+        timeout: 3000,
+        enableHighAccuracy: false // may cause errors if true
+    };
+
+    var watch = $cordovaGeolocation.watchPosition(watchOptions);
+    watch.then(
+        null,
+        function(err) {
+            // error
+        },
+        function(position) {
+            $scope.final_dest = position.coords;
+        });
+
+    $scope.$on('destroy', function() {
+      watch.clearWatch();
+    });
+
+    $scope.on_search = function() {
+      var service = new google.maps.places.AutocompleteService();
+      service.getQueryPredictions({ input: $scope.settings.final_dest_text }, function(predictions, status) {
+        if (status != google.maps.places.PlacesServiceStatus.OK) {
+          console.log(status);
+          return;
+        }
+
+        $scope.results = predictions;
+      });
+    };
+
+    $scope.set_location = function ($result) {
+      $scope.final_dest = $result;
+    };
+
+    $scope.submit = function() {
       window.localStorage.time_left = JSON.stringify($scope.settings.time_left);
       window.localStorage.final_dest = JSON.stringify($scope.settings.final_dest);
       $scope.getLikes();
