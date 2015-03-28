@@ -112,18 +112,20 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
 .controller('weight', function($scope) {
     // resObj = window.localStorage.fbResponse
     // response = JSON.parse(window.localStorage.fbResponse);
-    cats = [["cities and towns", 0],
-            ["countryside", 0],
-            ["culture", 0],
-            ["family friendly", 0],
-            ["film and tv", 0],
-            ["food and drinks", 0],
-            ["landmarks", 0],
-            ["music", 0]];
+    cats = [
+        ["cities and towns", 0],
+        ["countryside", 0],
+        ["culture", 0],
+        ["family friendly", 0],
+        ["film and tv", 0],
+        ["food and drinks", 0],
+        ["landmarks", 0],
+        ["music", 0]
+    ];
 
     fbCats = window.localStorage.categories; //["cities","food"];
 
-    for(i = 0; i<fbCats.length; i++){
+    for (i = 0; i < fbCats.length; i++) {
         max = 0;
         target = "";
         for (c = 0; c < cats.length; c++) {
@@ -313,19 +315,54 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
         cats[target][1] += max;
     }
 
-    // f1 = 0;
-    // f2 = 0;
-    // f3 = 0;
-    // for(i = 0; i < cats.length; i++){
-    //     if(cats[i][1] > f1) {f1 = cats[i][1]}
-    //         for
 
-    // }
-    // topThree = [f1, f2, f3];
 
-    var topThree = _.at( _.sortBy(_.filter(cats, function(item) { return item[1] > 0} ), function(item) { return item[1] * -1; }), 0, 1, 2);
+    $scope.topThree = _.at(_.sortBy(_.filter(cats, function(item) {
+        return item[1] > 0
+    }), function(item) {
+        return item[1] * -1;
+    }), 0, 1, 2);
 
     //console.log('huh');
+    var cat_child = function() {
+        token = 't=A9NsGgd9UmxR';
+        rl = 'http://api.visitbritain.com/items?type=category&' + token;
+        console.log(rl);
+
+        $http({
+            method: 'GET',
+            url: rl,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(m) {
+            cats_with_children = [
+                [m.data[0].title, m.data[0].children],
+                [m.data[1].title, m.data[1].children],
+                [m.data[2].title, m.data[2].children],
+                [m.data[3].title, m.data[3].children],
+                [m.data[4].title, m.data[4].children],
+                [m.data[5].title, m.data[5].children],
+                [m.data[6].title, m.data[6].children],
+                [m.data[7].title, m.data[7].children]
+            ];
+            // for (i = 0; i > m.data.length; i++) {
+            //     cats_with_children[i] = m.data[i].children;
+            // }
+            console.log(m.data[0].children);
+            console.log(cats_with_children);
+
+            $scope.CatChild = cats_with_children;
+        })
+    }
+
+    cat_child();
+
+    console.log('hey its me agia.');
+    console.log($scope.topThree);
+    console.log($scope.CatChild);
+
+
     hello = $http.get('http://api.visitbritain.com/items?type=location&near=-3.393402,57.009337&limit=24&t=A9NsGgd9UmxR');
 
     //console.log(hello);
@@ -353,7 +390,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).success(function(m){
+        }).success(function(m) {
 
         })
 
@@ -390,6 +427,7 @@ angular.module('starter.controllers', ['facebook', 'ionic'])
                     "points": locs
                 }
             }).success(function(d) {
+                console.log('D starts here');
                 console.log(d);
                 $scope.timeLine = d;
             })
